@@ -11,11 +11,9 @@
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   }
-
   function uid() {
     return Math.random().toString(16).slice(2) + "_" + Date.now().toString(16);
   }
-
   function escapeHtml(str) {
     return String(str)
       .replaceAll("&", "&amp;")
@@ -24,7 +22,6 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
   }
-
   function toast(msg) {
     let el = document.querySelector(".toast");
     if (!el) {
@@ -66,7 +63,6 @@
     const t = todayKey();
     if (state.lastActiveDay === t) return state;
 
-    // If last active was yesterday, increment; else reset to 1
     if (state.lastActiveDay) {
       const last = new Date(state.lastActiveDay);
       const today = new Date(t);
@@ -81,6 +77,17 @@
     return state;
   }
 
+  function timeAgo(iso) {
+    const ms = Date.now() - new Date(iso).getTime();
+    const min = Math.floor(ms / 60000);
+    if (min < 1) return "just now";
+    if (min < 60) return `${min} min ago`;
+    const hr = Math.floor(min / 60);
+    if (hr < 24) return `${hr} hr ago`;
+    const d = Math.floor(hr / 24);
+    return `${d} day${d > 1 ? "s" : ""} ago`;
+  }
+
   // ---------- Navigation active state ----------
   (function setActiveNav() {
     const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
@@ -93,9 +100,6 @@
   // ---------- DOM helpers ----------
   function $(sel) {
     return document.querySelector(sel);
-  }
-  function $all(sel) {
-    return Array.from(document.querySelectorAll(sel));
   }
 
   // ---------- Dashboard bindings ----------
@@ -120,7 +124,6 @@
     if (correctionsEl) correctionsEl.textContent = String((state.mistakes || []).length);
     if (sessionsEl) sessionsEl.textContent = String(state.sessionsCompleted || 0);
 
-    // recent mistakes list
     const list = $('[data-bind="recentMistakes"]');
     if (list) {
       const recent = (state.mistakes || []).slice(-4).reverse();
@@ -133,12 +136,12 @@
             <div class="mistake__text">
               ${escapeHtml(m.original)}
               <span class="arrow">→</span>
-              ${escapeHtml(m.corrected)}
+              <strong>${escapeHtml(m.corrected)}</strong>
             </div>
           </div>`
             )
             .join("")
-        : `<div class="muted">No mistakes yet. Start a chat to generate corrections.</div>`;
+        : `<div class="muted">No mistakes yet. Start Practice to generate corrections.</div>`;
     }
 
     const resetBtn = $('[data-action="resetApp"]');
@@ -151,21 +154,9 @@
     }
   }
 
-  function timeAgo(iso) {
-    const ms = Date.now() - new Date(iso).getTime();
-    const min = Math.floor(ms / 60000);
-    if (min < 1) return "just now";
-    if (min < 60) return `${min} min ago`;
-    const hr = Math.floor(min / 60);
-    if (hr < 24) return `${hr} hr ago`;
-    const d = Math.floor(hr / 24);
-    return `${d} day${d > 1 ? "s" : ""} ago`;
-  }
-
   // ---------- Lesson bindings ----------
   function bindLesson() {
     const state = loadState();
-
     const levelEl = $('[data-bind="userLevel"]');
     const goalEl = $('[data-bind="userGoal"]');
     if (levelEl) levelEl.textContent = state.user.level;
@@ -179,7 +170,6 @@
         s.sessionsCompleted = (s.sessionsCompleted || 0) + 1;
         saveState(s);
         toast("Lesson completed ✅ Progress updated");
-        // optional redirect
         const to = completeBtn.getAttribute("data-next");
         if (to) setTimeout(() => (location.href = to), 450);
       });
@@ -198,8 +188,7 @@
     return str.trim();
   }
 
-  // Small correction rules for MVP
-  function tutorReply(userText, userLevel) {
+  function tutorReply(userText) {
     const t = normalize(userText);
     const mistakes = [];
 
@@ -224,7 +213,7 @@
       });
     }
 
-    // Rule: missing apostrophe in s il vous plait
+    // Rule: missing apostrophe + accents in s'il vous plaît
     if (/s\s*il\s*vous\s*plait/i.test(t) && !/s['’]il/i.test(t)) {
       const corrected = t.replace(/s\s*il\s*vous\s*plait/gi, "s’il vous plaît");
       mistakes.push({
@@ -251,7 +240,7 @@
       response += `Nice! ✅ Now say it again with one extra detail (size, sugar, or “to go”).<br/><br/>`;
     }
 
-    // Always ask a follow-up question
+    // Follow-up question
     const followUps = [
       "Sur place ou à emporter ?",
       "Tu veux un café ou un thé ?",
@@ -283,8 +272,8 @@
     // Load existing chat
     const state = loadState();
     chatLog.innerHTML = "";
+
     if (!state.chat.length) {
-      // Seed
       const seed = {
         id: uid(),
         role: "assistant",
@@ -320,13 +309,12 @@
       chatLog.appendChild(typing);
       chatLog.scrollTop = chatLog.scrollHeight;
 
-      // tutor reply
       setTimeout(() => {
         typing.remove();
         const current = loadState();
-        const { response, mistakes } = tutorReply(text, current.user.level);
+        const { response, mistakes } = tutorReply(text);
 
-        // store assistant message (strip tags for storage)
+        // store assistant message (plain for storage)
         const assistantPlain = response
           .replace(/<br\s*\/?>/gi, "\n")
           .replace(/<\/?[^>]+(>|$)/g, "")
@@ -348,8 +336,6 @@
         });
 
         saveState(current);
-
-        // render assistant with HTML formatting
         appendBubble(chatLog, "assistant", response);
 
         if (mistakes.length) toast(`Logged ${mistakes.length} correction(s) ✅`);
