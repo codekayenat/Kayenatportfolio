@@ -1,4 +1,4 @@
-/* app.js — AI Sparck Static App Behavior (localStorage powered) */
+/* app.js — AI Sparck Static App (localStorage + Auth + App-like behavior) */
 
 (function () {
   // ---------- Utilities ----------
@@ -33,10 +33,29 @@
     el.classList.add("toast--show");
     setTimeout(() => el.classList.remove("toast--show"), 1800);
   }
+  function timeAgo(iso) {
+    const ms = Date.now() - new Date(iso).getTime();
+    const min = Math.floor(ms / 60000);
+    if (min < 1) return "just now";
+    if (min < 60) return `${min} min ago`;
+    const hr = Math.floor(min / 60);
+    if (hr < 24) return `${hr} hr ago`;
+    const d = Math.floor(hr / 24);
+    return `${d} day${d > 1 ? "s" : ""} ago`;
+  }
 
   // ---------- State ----------
   const defaultState = {
-    user: { name: "Ahsen", level: "A2", goal: "Conversation", dailyMinutes: 10 },
+    auth: {
+      isLoggedIn: false,
+      currentEmail: null,
+    },
+    // "users table" for demo auth
+    users: [
+      // example user (optional). You can remove it.
+      // { email: "demo@ai-sparck.com", password: "password123", name: "Demo User" }
+    ],
+    user: { name: "Learner", level: "A2", goal: "Conversation", dailyMinutes: 10 },
     streak: 0,
     lastActiveDay: null,
     sessionsCompleted: 0,
@@ -54,7 +73,6 @@
       return structuredClone(defaultState);
     }
   }
-
   function saveState(state) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
@@ -77,32 +95,117 @@
     return state;
   }
 
-  function timeAgo(iso) {
-    const ms = Date.now() - new Date(iso).getTime();
-    const min = Math.floor(ms / 60000);
-    if (min < 1) return "just now";
-    if (min < 60) return `${min} min ago`;
-    const hr = Math.floor(min / 60);
-    if (hr < 24) return `${hr} hr ago`;
-    const d = Math.floor(hr / 24);
-    return `${d} day${d > 1 ? "s" : ""} ago`;
-  }
-
-  // ---------- Navigation active state ----------
-  (function setActiveNav() {
-    const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-    document.querySelectorAll(".nav__item").forEach((a) => {
-      const href = (a.getAttribute("href") || "").toLowerCase();
-      a.classList.toggle("nav__item--active", href === path);
-    });
-  })();
-
   // ---------- DOM helpers ----------
   function $(sel) {
     return document.querySelector(sel);
   }
 
-  // ---------- Dashboard bindings ----------
+  // ---------- Auth ----------
+  function bindAuthSignup() {
+    const form = $('[data-auth="signupForm"]');
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = ($('[data-auth="name"]')?.value || "").trim() || "Learner";
+      const email = ($('[data-auth="email"]')?.value || "").trim().toLowerCase();
+      const password = ($('[data-auth="password"]')?.value || "").trim();
+
+      if (!email || !password) return toast("Please enter email and password.");
+      if (password.length < 6) return toast("Password must be at least 6 characters.");
+
+      const s = loadState();
+      const exists = (s.users || []).some((u) => u.email === email);
+      if (exists) return toast("Account already exists. Please log in.");
+
+      s.users = s.users || [];
+      s.users.push({ email, password, name });
+
+      // create session
+      s.auth.isLoggedIn = true;
+      s.auth.currentEmail = email;
+
+      // update display user profile
+      s.user.name = name;
+
+      saveState(s);
+      toast("Account created ✅ Redirecting…");
+      setTimeout(() => (location.href = "index.html"), 600);
+    });
+  }
+
+  function bindAuthLogin() {
+    const form = $('[data-auth="loginForm"]');
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = ($('[data-auth="email"]')?.value || "").trim().toLowerCase();
+      const password = ($('[data-auth="password"]')?.value || "").trim();
+
+      const s = loadState();
+      const user = (s.users || []).find((u) => u.email === email);
+
+      if (!user || user.password !== password) {
+        toast("Invalid email or password.");
+        return;
+      }
+
+      s.auth.isLoggedIn = true;
+      s.auth.currentEmail = email;
+
+      // load user name into profile
+      s.user.name = user.name || "Learner";
+
+      saveState(s);
+      toast("Logged in ✅ Redirecting…");
+      setTimeout(() => (location.href = "index.html"), 500);
+    });
+  }
+
+  function bindLogoutButtons() {
+    const btn = $('[data-action="logout"]');
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const s = loadState();
+      s.auth.isLoggedIn = false;
+      s.auth.currentEmail = null;
+      saveState(s);
+      toast("Logged out ✅");
+      setTimeout(() => (location.href = "login.html"), 450);
+    });
+  }
+
+  function requireAuthOrRedirect() {
+    const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    const publicPages = ["login.html", "signup.html"];
+
+    const s = loadState();
+    if (!s.auth?.isLoggedIn && !publicPages.includes(page)) {
+      // redirect to login
+      location.replace("login.html");
+      return false;
+    }
+
+    // If already logged in, keep users out of auth pages
+    if (s.auth?.isLoggedIn && publicPages.includes(page)) {
+      location.replace("index.html");
+      return false;
+    }
+
+    return true;
+  }
+
+  // ---------- Navigation active state ----------
+  function setActiveNav() {
+    const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    document.querySelectorAll(".nav__item").forEach((a) => {
+      const href = (a.getAttribute("href") || "").toLowerCase();
+      a.classList.toggle("nav__item--active", href === path);
+    });
+  }
+
+  // ---------- Dashboard ----------
   function bindDashboard() {
     const state = loadState();
 
@@ -147,14 +250,21 @@
     const resetBtn = $('[data-action="resetApp"]');
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
-        localStorage.removeItem(STORAGE_KEY);
-        toast("Reset complete ✅");
+        // Keep users but reset progress/chat
+        const s = loadState();
+        s.streak = 0;
+        s.lastActiveDay = null;
+        s.sessionsCompleted = 0;
+        s.chat = [];
+        s.mistakes = [];
+        saveState(s);
+        toast("Progress reset ✅");
         setTimeout(() => location.reload(), 200);
       });
     }
   }
 
-  // ---------- Lesson bindings ----------
+  // ---------- Lesson ----------
   function bindLesson() {
     const state = loadState();
     const levelEl = $('[data-bind="userLevel"]');
@@ -183,16 +293,11 @@
     }
   }
 
-  // ---------- Chat: simple tutor + mistake extraction ----------
-  function normalize(str) {
-    return str.trim();
-  }
-
+  // ---------- Chat tutor (simple rules) ----------
   function tutorReply(userText) {
-    const t = normalize(userText);
+    const t = userText.trim();
     const mistakes = [];
 
-    // Rule: cafe accent
     if (/cafe\b/i.test(t) && !/café/i.test(t)) {
       mistakes.push({
         category: "Spelling",
@@ -202,7 +307,6 @@
       });
     }
 
-    // Rule: politeness upgrade
     if (/^\s*(bonjour[, ]*)?je veux\b/i.test(t)) {
       const corrected = t.replace(/je veux/gi, "je voudrais");
       mistakes.push({
@@ -213,7 +317,6 @@
       });
     }
 
-    // Rule: missing apostrophe + accents in s'il vous plaît
     if (/s\s*il\s*vous\s*plait/i.test(t) && !/s['’]il/i.test(t)) {
       const corrected = t.replace(/s\s*il\s*vous\s*plait/gi, "s’il vous plaît");
       mistakes.push({
@@ -224,7 +327,6 @@
       });
     }
 
-    // Compose assistant message
     let response = "";
     if (mistakes.length) {
       const top = mistakes[0];
@@ -240,16 +342,13 @@
       response += `Nice! ✅ Now say it again with one extra detail (size, sugar, or “to go”).<br/><br/>`;
     }
 
-    // Follow-up question
     const followUps = [
       "Sur place ou à emporter ?",
       "Tu veux un café ou un thé ?",
       "Avec du sucre ?",
       "Quelle taille (petit, moyen, grand) ?",
     ];
-    const q = followUps[Math.floor(Math.random() * followUps.length)];
-    response += `<em>${escapeHtml(q)}</em>`;
-
+    response += `<em>${escapeHtml(followUps[Math.floor(Math.random() * followUps.length)])}</em>`;
     return { response, mistakes };
   }
 
@@ -261,6 +360,7 @@
     container.scrollTop = container.scrollHeight;
   }
 
+  // ---------- Practice ----------
   function bindPractice() {
     const chatLog = $('[data-chat="log"]');
     const input = $('[data-chat="input"]');
@@ -269,24 +369,20 @@
 
     if (!chatLog || !input || !sendBtn) return;
 
-    // Load existing chat
     const state = loadState();
     chatLog.innerHTML = "";
 
     if (!state.chat.length) {
-      const seed = {
+      state.chat.push({
         id: uid(),
         role: "assistant",
         content: "Salut! 😊 You’re at a café. Start by greeting me and ordering a drink.",
         ts: nowISO(),
-      };
-      state.chat.push(seed);
+      });
       saveState(state);
     }
 
-    loadState().chat.forEach((m) => {
-      appendBubble(chatLog, m.role, escapeHtml(m.content));
-    });
+    loadState().chat.forEach((m) => appendBubble(chatLog, m.role, escapeHtml(m.content)));
 
     function sendMessage() {
       const text = String(input.value || "").trim();
@@ -296,13 +392,10 @@
       let s = loadState();
       ensureStreak(s);
 
-      // store user message
-      const u = { id: uid(), role: "user", content: text, ts: nowISO() };
-      s.chat.push(u);
+      s.chat.push({ id: uid(), role: "user", content: text, ts: nowISO() });
       saveState(s);
       appendBubble(chatLog, "user", escapeHtml(text));
 
-      // typing indicator
       const typing = document.createElement("div");
       typing.className = "typing";
       typing.innerHTML = "<span></span><span></span><span></span>";
@@ -311,19 +404,17 @@
 
       setTimeout(() => {
         typing.remove();
+
         const current = loadState();
         const { response, mistakes } = tutorReply(text);
 
-        // store assistant message (plain for storage)
         const assistantPlain = response
           .replace(/<br\s*\/?>/gi, "\n")
           .replace(/<\/?[^>]+(>|$)/g, "")
           .trim();
 
-        const a = { id: uid(), role: "assistant", content: assistantPlain, ts: nowISO() };
-        current.chat.push(a);
+        current.chat.push({ id: uid(), role: "assistant", content: assistantPlain, ts: nowISO() });
 
-        // log mistakes
         mistakes.forEach((m) => {
           current.mistakes.push({
             id: uid(),
@@ -358,18 +449,16 @@
     }
   }
 
-  // ---------- Progress bindings ----------
+  // ---------- Progress ----------
   function bindProgress() {
     const state = loadState();
 
     const streakEl = $('[data-bind="streak"]');
     const correctionsEl = $('[data-bind="corrections"]');
-    const levelEl = $('[data-bind="userLevel"]');
     const sessionsEl = $('[data-bind="sessions"]');
 
     if (streakEl) streakEl.textContent = `${state.streak || 0} days`;
     if (correctionsEl) correctionsEl.textContent = String((state.mistakes || []).length);
-    if (levelEl) levelEl.textContent = state.user.level;
     if (sessionsEl) sessionsEl.textContent = String(state.sessionsCompleted || 0);
 
     const list = $('[data-bind="mistakeLog"]');
@@ -406,8 +495,22 @@
     }
   }
 
-  // ---------- Page router ----------
+  // ---------- Boot ----------
+  // 1) Route guard
+  if (!requireAuthOrRedirect()) return;
+
+  // 2) Nav active state (for app pages)
+  setActiveNav();
+
+  // 3) Bind logout (if exists on page)
+  bindLogoutButtons();
+
+  // 4) Page router
   const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+  if (page === "signup.html") bindAuthSignup();
+  if (page === "login.html") bindAuthLogin();
+
   if (page === "index.html" || page === "") bindDashboard();
   if (page === "lesson.html") bindLesson();
   if (page === "practice.html") bindPractice();
