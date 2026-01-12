@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Sparck — Progress</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <div class="brand">
+          <div class="brand__logo">⚡</div>
+          <div class="brand__text">
+            <div class="brand__name">AI Sparck</div>
+            <div class="brand__tag">French Coach</div>
+          </div>
+        </div>
+
+        <div class="topbar__actions">
+          <a class="btn btn--ghost" href="practice.html">Practice</a>
+          <a class="btn btn--ghost" href="lesson.html">Lesson</a>
+          <a class="btn btn--primary" href="index.html">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="app">
+      <aside class="sidebar">
+        <nav class="nav">
+          <a class="nav__item" href="index.html"><span class="nav__icon">🏠</span><span>Dashboard</span></a>
+          <a class="nav__item" href="lesson.html"><span class="nav__icon">✨</span><span>Lesson</span></a>
+          <a class="nav__item" href="practice.html"><span class="nav__icon">💬</span><span>Practice</span></a>
+          <a class="nav__item" href="progress.html"><span class="nav__icon">📈</span><span>Progress</span></a>
+        </nav>
+
+        <div class="tip">
+          <div class="tip__label">Progress tip</div>
+          <div class="tip__text">
+            Patterns matter. Fix the same mistake 3 times and it disappears.
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="pagehead">
+          <div>
+            <h1 class="h1">Progress</h1>
+            <p class="muted">Your corrections and learning history (static demo).</p>
+          </div>
+          <div class="pagehead__actions">
+            <button class="btn btn--ghost">Export</button>
+            <a class="btn btn--primary" href="practice.html">Practice more</a>
+          </div>
+        </div>
+
+        <section class="grid grid--3">
+          <article class="card">
+            <div class="card__kicker">Streak</div>
+            <div class="card__title">4 days</div>
+            <p class="muted">You practiced 4 days in a row.</p>
+          </article>
+
+          <article class="card">
+            <div class="card__kicker">Corrections</div>
+            <div class="card__title">12</div>
+            <p class="muted">Corrections logged this week.</p>
+          </article>
+
+          <article class="card">
+            <div class="card__kicker">Level</div>
+            <div class="card__title">A2</div>
+            <p class="muted">Estimated from practice and lessons.</p>
+          </article>
+        </section>
+
+        <section class="card">
+          <div class="card__row">
+            <div>
+              <div class="card__kicker">Mistake log</div>
+              <div class="card__title">Your recent corrections</div>
+            </div>
+            <a class="btn btn--ghost" href="practice.html">Keep practicing</a>
+          </div>
+
+          <div class="mistakes">
+            <div class="mistake">
+              <div class="mistake__meta">Spelling · Today</div>
+              <div class="mistake__text">
+                un cafe <span class="arrow">→</span> un <strong>café</strong> (accent)
+              </div>
+            </div>
+
+            <div class="mistake">
+              <div class="mistake__meta">Politeness · Today</div>
+              <div class="mistake__text">
+                Je veux… <span class="arrow">→</span> Je <strong>voudrais</strong>…
+              </div>
+            </div>
+
+            <div class="mistake">
+              <div class="mistake__meta">Word order · Yesterday</div>
+              <div class="mistake__text">
+                Je voudrais café un <span class="arrow">→</span> Je voudrais <strong>un café</strong>
+              </div>
+            </div>
+
+            <div class="mistake">
+              <div class="mistake__meta">Phrase · Yesterday</div>
+              <div class="mistake__text">
+                pour ici <span class="arrow">→</span> <strong>sur place</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span class="muted">© AI Sparck</span>
+          <span class="muted">Progress page</span>
+        </footer>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
