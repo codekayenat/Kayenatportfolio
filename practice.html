@@ -65,11 +65,17 @@
             <div class="badge">Online</div>
           </div>
 
-          <div class="chat">
-            <div class="chat__log">
-              <div class="bubble bubble--assistant">
-                Salut! 😊 You’re at a café. Start by greeting me and ordering a drink.
-              </div>
+        
+
+              <div class="chat">
+  <div class="chat__log" data-chat="log"></div>
+
+  <div class="chat__input">
+    <input data-chat="input" type="text" placeholder="Write in French..." />
+    <button class="btn btn--primary" data-chat="send">Send</button>
+  </div>
+</div>
+
 
               <div class="bubble bubble--user">
                 Bonjour, je veux un cafe.
