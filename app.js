@@ -178,7 +178,8 @@
 
   function requireAuthOrRedirect() {
     const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-    const publicPages = ["login.html", "signup.html"];
+    const publicPages = ["login.html", "signup.html", "index.html"];
+
 
     const s = loadState();
     if (!s.auth?.isLoggedIn && !publicPages.includes(page)) {
