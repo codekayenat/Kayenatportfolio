@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Sparck </title>
-    <link rel="stylesheet" href="styles.css"/>
+    <title>AI Sparck — Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="style.css">
   </head>
 
@@ -20,9 +20,10 @@
         </div>
 
         <div class="topbar__actions">
-          <button class="btn btn--ghost">Docs</button>
-          <button class="btn btn--ghost">Pricing</button>
-          <button class="btn btn--primary">Sign in</button>
+          <a class="btn btn--ghost" href="lesson.html">Lesson</a>
+          <a class="btn btn--ghost" href="practice.html">Practice</a>
+          <a class="btn btn--ghost" href="progress.html">Progress</a>
+          <button class="btn btn--ghost" data-action="resetApp">Reset app</button>
         </div>
       </div>
     </header>
@@ -39,7 +40,7 @@
         <div class="tip">
           <div class="tip__label">Tip</div>
           <div class="tip__text">
-            Write in French. If you’re stuck, mix French + English and I’ll help you.
+            Practice daily. Mistakes are your training data—collect them on purpose.
           </div>
         </div>
       </aside>
@@ -59,11 +60,12 @@
         <section class="grid grid--3">
           <article class="card card--span2">
             <div class="card__kicker">Welcome</div>
-            <div class="card__title">Hello 👋</div>
+            <div class="card__title"><span data-bind="userName">Learner</span> 👋</div>
+
             <div class="stats">
-              <div class="pill">Level <strong>A2</strong></div>
-              <div class="pill">Goal <strong>Conversation</strong></div>
-              <div class="pill">Daily <strong>10 min</strong></div>
+              <div class="pill">Level <strong data-bind="userLevel">A2</strong></div>
+              <div class="pill">Goal <strong data-bind="userGoal">Conversation</strong></div>
+              <div class="pill">Daily <strong data-bind="userDaily">10 min</strong></div>
             </div>
 
             <div class="card__actions">
@@ -73,13 +75,22 @@
           </article>
 
           <article class="card">
-            <div class="card__kicker">Daily focus</div>
-            <div class="card__title">Consistency</div>
-            <p class="muted">Do 10 minutes, log 1 correction, repeat. Small wins compound.</p>
+            <div class="card__kicker">Today</div>
+            <div class="card__title">Your stats</div>
+            <p class="muted">These update automatically as you practice and complete lessons.</p>
+
             <div class="divider"></div>
             <div class="mini">
               <div class="mini__label">Streak</div>
-              <div class="mini__value">4 days</div>
+              <div class="mini__value" data-bind="streak">0 days</div>
+            </div>
+            <div class="mini" style="margin-top:8px">
+              <div class="mini__label">Corrections</div>
+              <div class="mini__value" data-bind="corrections">0</div>
+            </div>
+            <div class="mini" style="margin-top:8px">
+              <div class="mini__label">Sessions</div>
+              <div class="mini__value" data-bind="sessions">0</div>
             </div>
           </article>
         </section>
@@ -88,7 +99,7 @@
           <article class="card">
             <div class="card__row">
               <div>
-                <div class="card__kicker">Quick access</div>
+                <div class="card__kicker">Next up</div>
                 <div class="card__title">Today’s lesson</div>
               </div>
               <a class="btn btn--ghost" href="lesson.html">Open</a>
@@ -99,7 +110,7 @@
           <article class="card">
             <div class="card__row">
               <div>
-                <div class="card__kicker">Quick access</div>
+                <div class="card__kicker">Next up</div>
                 <div class="card__title">Practice chat</div>
               </div>
               <a class="btn btn--ghost" href="practice.html">Open</a>
@@ -117,25 +128,12 @@
             <a class="btn btn--ghost" href="progress.html">View all</a>
           </div>
 
-          <div class="mistakes">
-            <div class="mistake">
-              <div class="mistake__meta">Grammar · 2 mins ago</div>
-              <div class="mistake__text">
-                Je veux un cafe <span class="arrow">→</span> Je veux un <strong>café</strong>
-              </div>
-            </div>
-            <div class="mistake">
-              <div class="mistake__meta">Politeness · 10 mins ago</div>
-              <div class="mistake__text">
-                Je veux… <span class="arrow">→</span> Je <strong>voudrais</strong>…
-              </div>
-            </div>
-          </div>
+          <div class="mistakes" data-bind="recentMistakes"></div>
         </section>
 
         <footer class="footer">
           <span class="muted">© AI Sparck</span>
-          <span class="muted">Static HTML + CSS</span>
+          <span class="muted">Static HTML + CSS + JS</span>
         </footer>
       </main>
     </div>
