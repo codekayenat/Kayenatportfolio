@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Sparck — Lesson</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
@@ -21,7 +20,8 @@
 
         <div class="topbar__actions">
           <a class="btn btn--ghost" href="index.html">Dashboard</a>
-          <a class="btn btn--primary" href="practice.html">Practice</a>
+          <a class="btn btn--ghost" href="practice.html">Practice</a>
+          <a class="btn btn--ghost" href="progress.html">Progress</a>
         </div>
       </div>
     </header>
@@ -47,11 +47,15 @@
         <div class="pagehead">
           <div>
             <h1 class="h1">Today’s Lesson</h1>
-            <p class="muted">Level A2 · Goal: Conversation · Topic: Ordering coffee</p>
+            <p class="muted">
+              Level <span data-bind="userLevel">A2</span> · Goal: <span data-bind="userGoal">Conversation</span> · Topic: Ordering coffee
+            </p>
           </div>
           <div class="pagehead__actions">
-            <button class="btn btn--ghost">Regenerate</button>
-            <a class="btn btn--primary" href="practice.html">Practice now</a>
+            <button class="btn btn--ghost" data-action="regenLesson">Regenerate</button>
+            <button class="btn btn--primary" data-action="completeLesson" data-next="progress.html">
+              Complete lesson
+            </button>
           </div>
         </div>
 
@@ -68,7 +72,7 @@
             <div class="lesson__block">
               <div class="lesson__label">Warm-up</div>
               <div class="lesson__text">
-                You enter a café. Write 1 greeting sentence. <br />
+                You enter a café. Write 1 greeting sentence.<br />
                 Then ask: “Do you have croissants?”
               </div>
             </div>
@@ -76,15 +80,14 @@
             <div class="lesson__block">
               <div class="lesson__label">Vocab</div>
               <div class="lesson__text">
-                un café · un thé · une boisson · un croissant · à emporter (to go) · sur place (for here) · s’il vous plaît
+                un café · un thé · une boisson · un croissant · à emporter · sur place · s’il vous plaît
               </div>
             </div>
 
             <div class="lesson__block">
               <div class="lesson__label">Grammar</div>
               <div class="lesson__text">
-                Use <strong>Je voudrais</strong> for polite requests:
-                <br />
+                Use <strong>Je voudrais</strong> for polite requests:<br />
                 “Je voudrais un café, s’il vous plaît.”
               </div>
             </div>
@@ -92,8 +95,8 @@
             <div class="lesson__block">
               <div class="lesson__label">Mini-dialogue</div>
               <div class="lesson__text">
-                A: Bonjour! Je voudrais un café, s’il vous plaît. <br />
-                B: Sur place ou à emporter? <br />
+                A: Bonjour! Je voudrais un café, s’il vous plaît.<br />
+                B: Sur place ou à emporter?<br />
                 A: Sur place, merci.
               </div>
             </div>
@@ -101,9 +104,8 @@
             <div class="lesson__block">
               <div class="lesson__label">Challenge</div>
               <div class="lesson__text">
-                Write 2 sentences:
-                <br />
-                1) One order “sur place” <br />
+                Write 2 sentences:<br />
+                1) One order “sur place”<br />
                 2) One order “à emporter”
               </div>
             </div>
