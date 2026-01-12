@@ -4,12 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Sparck — Dashboard</title>
-  
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <!-- Topbar -->
     <header class="topbar">
       <div class="topbar__inner">
         <div class="brand">
@@ -28,31 +26,13 @@
       </div>
     </header>
 
-    <!-- App layout -->
     <div class="app">
-      <!-- Sidebar -->
       <aside class="sidebar">
         <nav class="nav">
-          <a class="nav__item nav__item--active" href="#">
-            <span class="nav__icon">🏠</span>
-            <span>Dashboard</span>
-          </a>
-          <a class="nav__item" href="#">
-            <span class="nav__icon">✨</span>
-            <span>Lesson</span>
-          </a>
-          <a class="nav__item" href="#">
-            <span class="nav__icon">💬</span>
-            <span>Practice</span>
-          </a>
-          <a class="nav__item" href="#">
-            <span class="nav__icon">📈</span>
-            <span>Progress</span>
-          </a>
-          <a class="nav__item" href="#">
-            <span class="nav__icon">⚙️</span>
-            <span>Settings</span>
-          </a>
+          <a class="nav__item" href="index.html"><span class="nav__icon">🏠</span><span>Dashboard</span></a>
+          <a class="nav__item" href="lesson.html"><span class="nav__icon">✨</span><span>Lesson</span></a>
+          <a class="nav__item" href="practice.html"><span class="nav__icon">💬</span><span>Practice</span></a>
+          <a class="nav__item" href="progress.html"><span class="nav__icon">📈</span><span>Progress</span></a>
         </nav>
 
         <div class="tip">
@@ -63,7 +43,6 @@
         </div>
       </aside>
 
-      <!-- Main -->
       <main class="main">
         <div class="pagehead">
           <div>
@@ -71,16 +50,15 @@
             <p class="muted">Personalized learning, real-time practice, adaptive feedback.</p>
           </div>
           <div class="pagehead__actions">
-            <button class="btn btn--ghost">Placement</button>
-            <button class="btn btn--primary">Today’s lesson</button>
+            <a class="btn btn--ghost" href="progress.html">View progress</a>
+            <a class="btn btn--primary" href="lesson.html">Today’s lesson</a>
           </div>
         </div>
 
-        <!-- Cards row -->
         <section class="grid grid--3">
           <article class="card card--span2">
             <div class="card__kicker">Welcome</div>
-            <div class="card__title">Hello 👋</div>
+            <div class="card__title">Ahsen 👋</div>
             <div class="stats">
               <div class="pill">Level <strong>A2</strong></div>
               <div class="pill">Goal <strong>Conversation</strong></div>
@@ -88,17 +66,15 @@
             </div>
 
             <div class="card__actions">
-              <button class="btn btn--primary">Start practice</button>
-              <button class="btn btn--ghost">Review mistakes</button>
+              <a class="btn btn--primary" href="practice.html">Start practice</a>
+              <a class="btn btn--ghost" href="progress.html">Review mistakes</a>
             </div>
           </article>
 
           <article class="card">
             <div class="card__kicker">Daily focus</div>
             <div class="card__title">Consistency</div>
-            <p class="muted">
-              Do 10 minutes, log 1 correction, repeat. Small wins compound fast.
-            </p>
+            <p class="muted">Do 10 minutes, log 1 correction, repeat. Small wins compound.</p>
             <div class="divider"></div>
             <div class="mini">
               <div class="mini__label">Streak</div>
@@ -107,97 +83,37 @@
           </article>
         </section>
 
-        <!-- Two panels -->
         <section class="grid grid--2">
-          <!-- Lesson panel -->
           <article class="card">
             <div class="card__row">
               <div>
-                <div class="card__kicker">Today’s lesson</div>
-                <div class="card__title">Ordering coffee (A2)</div>
+                <div class="card__kicker">Quick access</div>
+                <div class="card__title">Today’s lesson</div>
               </div>
-              <button class="btn btn--ghost">Regenerate</button>
+              <a class="btn btn--ghost" href="lesson.html">Open</a>
             </div>
-
-            <div class="lesson">
-              <div class="lesson__block">
-                <div class="lesson__label">Warm-up</div>
-                <div class="lesson__text">
-                  Imagine you’re at a café. How would you greet the barista?
-                </div>
-              </div>
-
-              <div class="lesson__block">
-                <div class="lesson__label">Vocab</div>
-                <div class="lesson__text">
-                  un café, un thé, une boisson, s’il vous plaît, à emporter, sur place
-                </div>
-              </div>
-
-              <div class="lesson__block">
-                <div class="lesson__label">Grammar</div>
-                <div class="lesson__text">
-                  Use <strong>Je voudrais</strong> (I would like) for polite requests.
-                  Try: “Je voudrais un café, s’il vous plaît.”
-                </div>
-              </div>
-
-              <div class="lesson__block">
-                <div class="lesson__label">Challenge</div>
-                <div class="lesson__text">
-                  Write 2 sentences: one for “to go” and one for “here”.
-                </div>
-              </div>
-            </div>
+            <p class="muted">A short lesson built for your level with interactive prompts.</p>
           </article>
 
-          <!-- Chat panel -->
           <article class="card">
             <div class="card__row">
               <div>
-                <div class="card__kicker">Practice chat</div>
-                <div class="card__title">Talk with AI Sparck</div>
+                <div class="card__kicker">Quick access</div>
+                <div class="card__title">Practice chat</div>
               </div>
-              <div class="badge">Live</div>
+              <a class="btn btn--ghost" href="practice.html">Open</a>
             </div>
-
-            <div class="chat">
-              <div class="chat__log">
-                <div class="bubble bubble--assistant">
-                  Salut! 😊 Let’s practice. What would you like to order at a café?
-                </div>
-
-                <div class="bubble bubble--user">
-                  Je veux un cafe.
-                </div>
-
-                <div class="bubble bubble--assistant">
-                  Correction: <strong>Je veux un café.</strong> ✅ (Add the accent: “café”.) <br />
-                  Want to sound more polite? Try: <strong>Je voudrais un café, s’il vous plaît.</strong> <br />
-                  Your turn: “for here” or “to go”?
-                </div>
-
-                <div class="typing">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-
-              <div class="chat__input">
-                <input type="text" placeholder="Write in French..." />
-                <button class="btn btn--primary">Send</button>
-              </div>
-            </div>
+            <p class="muted">Roleplay + corrections. One follow-up question at a time.</p>
           </article>
         </section>
 
-        <!-- Mistakes -->
         <section class="card">
           <div class="card__row">
             <div>
               <div class="card__kicker">Recent mistakes</div>
               <div class="card__title">Learning fuel</div>
             </div>
-            <button class="btn btn--ghost">View all</button>
+            <a class="btn btn--ghost" href="progress.html">View all</a>
           </div>
 
           <div class="mistakes">
@@ -207,18 +123,10 @@
                 Je veux un cafe <span class="arrow">→</span> Je veux un <strong>café</strong>
               </div>
             </div>
-
             <div class="mistake">
               <div class="mistake__meta">Politeness · 10 mins ago</div>
               <div class="mistake__text">
-                Je veux… <span class="arrow">→</span> Je <strong>voudrais</strong…
-              </div>
-            </div>
-
-            <div class="mistake">
-              <div class="mistake__meta">Word choice · Yesterday</div>
-              <div class="mistake__text">
-                sur place / à emporter <span class="arrow">→</span> correct usage examples
+                Je veux… <span class="arrow">→</span> Je <strong>voudrais</strong>…
               </div>
             </div>
           </div>
@@ -226,9 +134,11 @@
 
         <footer class="footer">
           <span class="muted">© AI Sparck</span>
-          <span class="muted">Built with HTML + CSS</span>
+          <span class="muted">Static HTML + CSS</span>
         </footer>
       </main>
     </div>
+
+    <script src="app.js"></script>
   </body>
 </html>
