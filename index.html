@@ -1,206 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Sparck — Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kayenat Zaidi | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
-</head>
-<body>
-
-
-  <section id="about">
-    <div class="container">
-      <h2>Kayenat Zaidi</h2>
-      <p><strong>Grade 12 Student | Western Canada High School | Future Engineer</strong></p>
-      
-      <p>
-        Hi! I’m <strong>Kayenat Zaidi</strong>,  A motivated Grade 12 student with strong foundation in applied math, programming, and algorithms through <strong> CS50, CS50 Python and Math for Engineers.</strong> 
-        My portfolio demonstrates initiative, curiosity, and problem-solving skills through<strong> advanced coursework</strong> and <strong>independent projects</strong>, showing readiness for rigorous university engineering programs.
-
-        
-
-      </p>
-    </div>
-  </section>
-
-  <section id="courses">
-    <div class="container">
-      <h2>Mathematical Foundations </h2>
-      <div class="project-list">
-        <div class="project">
-          <h3>Vector Calculus for Engineers</h3>
-          <h4>Hong Kong University of Science and Technology</h4><br>
-          <p style="font-size: 15px;">The Vector Calculus for Engineers course on Coursera teaches how to apply vector calculus concepts like gradient, divergence, curl, and integrals to solve practical engineering problems.
-</p><br><a href="https://www.coursera.org/account/accomplishments/verify/GUSPDQZ13F64" target="_blank">Vector Calculus for Engineers Certificate</a> 
+  <body>
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar__inner">
+        <div class="brand">
+          <div class="brand__logo">⚡</div>
+          <div class="brand__text">
+            <div class="brand__name">AI Sparck</div>
+            <div class="brand__tag">French Coach</div>
+          </div>
         </div>
-        <div class="project">
-          <h3>Matrix Algebra for Engineers</h3>
-         <h4>Hong Kong University of Science and Technology</h4><br>
-          <p style="font-size: 15px;">The Matrix Algebra for Engineers course on Coursera teaches how to use matrices and linear algebra techniques to solve engineering problems efficiently.
-</p><br><a href="https://www.coursera.org/account/accomplishments/verify/5RHWE3UGIIA9" target="_blank">Algebra for Engineers Certificate</a>
-        </div>
-        <div class="project">
-          <h3>Introduction to Advanced Calculus</h3>
-          <h4>University of Sydney</h4><br>
-          <p style="font-size: 15px;">The Introduction to Advanced Calculus course on Coursera by the University of Sydney introduces rigorous calculus concepts, including limits, continuity, differentiation, and integration, with a focus on proofs and theoretical understanding.</p>
-        <br><a href="https://www.coursera.org/account/accomplishments/verify/SL6HWT9LN2BY" target="_blank">Advanced Calculus Certificate</a>
+
+        <div class="topbar__actions">
+          <button class="btn btn--ghost">Docs</button>
+          <button class="btn btn--ghost">Pricing</button>
+          <button class="btn btn--primary">Sign in</button>
         </div>
       </div>
+    </header>
+
+    <!-- App layout -->
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav class="nav">
+          <a class="nav__item nav__item--active" href="#">
+            <span class="nav__icon">🏠</span>
+            <span>Dashboard</span>
+          </a>
+          <a class="nav__item" href="#">
+            <span class="nav__icon">✨</span>
+            <span>Lesson</span>
+          </a>
+          <a class="nav__item" href="#">
+            <span class="nav__icon">💬</span>
+            <span>Practice</span>
+          </a>
+          <a class="nav__item" href="#">
+            <span class="nav__icon">📈</span>
+            <span>Progress</span>
+          </a>
+          <a class="nav__item" href="#">
+            <span class="nav__icon">⚙️</span>
+            <span>Settings</span>
+          </a>
+        </nav>
+
+        <div class="tip">
+          <div class="tip__label">Tip</div>
+          <div class="tip__text">
+            Write in French. If you’re stuck, mix French + English and I’ll help you.
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <div class="pagehead">
+          <div>
+            <h1 class="h1">Dashboard</h1>
+            <p class="muted">Personalized learning, real-time practice, adaptive feedback.</p>
+          </div>
+          <div class="pagehead__actions">
+            <button class="btn btn--ghost">Placement</button>
+            <button class="btn btn--primary">Today’s lesson</button>
+          </div>
+        </div>
+
+        <!-- Cards row -->
+        <section class="grid grid--3">
+          <article class="card card--span2">
+            <div class="card__kicker">Welcome</div>
+            <div class="card__title">Ahsen 👋</div>
+            <div class="stats">
+              <div class="pill">Level <strong>A2</strong></div>
+              <div class="pill">Goal <strong>Conversation</strong></div>
+              <div class="pill">Daily <strong>10 min</strong></div>
+            </div>
+
+            <div class="card__actions">
+              <button class="btn btn--primary">Start practice</button>
+              <button class="btn btn--ghost">Review mistakes</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__kicker">Daily focus</div>
+            <div class="card__title">Consistency</div>
+            <p class="muted">
+              Do 10 minutes, log 1 correction, repeat. Small wins compound fast.
+            </p>
+            <div class="divider"></div>
+            <div class="mini">
+              <div class="mini__label">Streak</div>
+              <div class="mini__value">4 days</div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Two panels -->
+        <section class="grid grid--2">
+          <!-- Lesson panel -->
+          <article class="card">
+            <div class="card__row">
+              <div>
+                <div class="card__kicker">Today’s lesson</div>
+                <div class="card__title">Ordering coffee (A2)</div>
+              </div>
+              <button class="btn btn--ghost">Regenerate</button>
+            </div>
+
+            <div class="lesson">
+              <div class="lesson__block">
+                <div class="lesson__label">Warm-up</div>
+                <div class="lesson__text">
+                  Imagine you’re at a café. How would you greet the barista?
+                </div>
+              </div>
+
+              <div class="lesson__block">
+                <div class="lesson__label">Vocab</div>
+                <div class="lesson__text">
+                  un café, un thé, une boisson, s’il vous plaît, à emporter, sur place
+                </div>
+              </div>
+
+              <div class="lesson__block">
+                <div class="lesson__label">Grammar</div>
+                <div class="lesson__text">
+                  Use <strong>Je voudrais</strong> (I would like) for polite requests.
+                  Try: “Je voudrais un café, s’il vous plaît.”
+                </div>
+              </div>
+
+              <div class="lesson__block">
+                <div class="lesson__label">Challenge</div>
+                <div class="lesson__text">
+                  Write 2 sentences: one for “to go” and one for “here”.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Chat panel -->
+          <article class="card">
+            <div class="card__row">
+              <div>
+                <div class="card__kicker">Practice chat</div>
+                <div class="card__title">Talk with AI Sparck</div>
+              </div>
+              <div class="badge">Live</div>
+            </div>
+
+            <div class="chat">
+              <div class="chat__log">
+                <div class="bubble bubble--assistant">
+                  Salut! 😊 Let’s practice. What would you like to order at a café?
+                </div>
+
+                <div class="bubble bubble--user">
+                  Je veux un cafe.
+                </div>
+
+                <div class="bubble bubble--assistant">
+                  Correction: <strong>Je veux un café.</strong> ✅ (Add the accent: “café”.) <br />
+                  Want to sound more polite? Try: <strong>Je voudrais un café, s’il vous plaît.</strong> <br />
+                  Your turn: “for here” or “to go”?
+                </div>
+
+                <div class="typing">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+
+              <div class="chat__input">
+                <input type="text" placeholder="Write in French..." />
+                <button class="btn btn--primary">Send</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Mistakes -->
+        <section class="card">
+          <div class="card__row">
+            <div>
+              <div class="card__kicker">Recent mistakes</div>
+              <div class="card__title">Learning fuel</div>
+            </div>
+            <button class="btn btn--ghost">View all</button>
+          </div>
+
+          <div class="mistakes">
+            <div class="mistake">
+              <div class="mistake__meta">Grammar · 2 mins ago</div>
+              <div class="mistake__text">
+                Je veux un cafe <span class="arrow">→</span> Je veux un <strong>café</strong>
+              </div>
+            </div>
+
+            <div class="mistake">
+              <div class="mistake__meta">Politeness · 10 mins ago</div>
+              <div class="mistake__text">
+                Je veux… <span class="arrow">→</span> Je <strong>voudrais</strong…
+              </div>
+            </div>
+
+            <div class="mistake">
+              <div class="mistake__meta">Word choice · Yesterday</div>
+              <div class="mistake__text">
+                sur place / à emporter <span class="arrow">→</span> correct usage examples
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span class="muted">© AI Sparck</span>
+          <span class="muted">Built with HTML + CSS</span>
+        </footer>
+      </main>
     </div>
-  </section>
-
-<section id="projects">
-    <div class="container">
-      <h2>Programming & Computer Science</h2>
-      <div class="project-list">
-        <div class="project">
-          <h3>CS50's Introduction to Programming with Python
-</h3><h4>Harvard University</h4><br>
-          <p style="font-size: 15px;">CS50 Introduction to Programming with Python (10 weeks, 5–9 hours/week): Learned core programming concepts and applied Python for problem-solving and projects.
-</p><br><a href="https://cs50.harvard.edu/certificates/e315bd84-7b52-4933-ac5c-0fd83ec108ff" target="_blank">CS50 Introduction to Programming with Python</a>
-        </div>
-        <div class="project">
-          <h3>CS50's Introduction to Computer Science
-</h3><h4>Harvard University</h4><br>
-        <p style="font-size: 15px;">CS50 Introduction to Computer Science (12 weeks, 10–18 hours/week): Covered algorithms, data structures, and programming in C, Python, SQL, HTML, CSS, and JavaScript.
-</p><br><a href="https://cs50.harvard.edu/certificates/68c6e62f-7222-4048-86b3-91d144019515" target="_blank">CS50 Introduction to Computer Science</a>
-        </div>
-        <div class="project">
-          <h3>Introduction to HTML5/CSS3
-</h3><h4>University of Michigan</h4><br>
-        <p style="font-size: 15px;">Web Design for Everybody (3 weeks, 3–5 hours/week): Learned HTML fundamentals, webpage structure, links, images, accessibility standards, and completed a final project.
-
-</p><br><a href="https://www.coursera.org/account/accomplishments/verify/K8MWDBKKSX9D" target="_blank">Introduction to HTML5/CSS3</a>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="container">
-      <h2>Design Foundations</h2>
-      <div class="project-list">
-        <div class="project">
-          <h3>Google UX Design</h3>
-          <h4>Google</h4><br>
-          <p style="font-size: 15px;">Google UX Design Specialization (6 months, 8-10 hours/week): Learned user research, wireframing, prototyping, usability testing, and accessibility, completing hands-on projects in Figma and building a professional UX portfolio.
-</p><br><a href="https://www.coursera.org/account/accomplishments/professional-cert/NNYLMUCR4QHK" target="_blank">Google UX Design Certificate</a>
-        </div>
-        <div class="project">
-          <h3>Human-Centered Design</h3>
-          <h4>University of California San Diego</h4>
-        <br><p style="font-size: 15px;">Interaction Design(3 weeks, 3-5 hours/week): Learned rapid prototyping, low-fidelity mockups, user testing, and human-centered design strategies for creating effective, user-friendly interfaces.
-
-</p><br><a href="https://www.coursera.org/account/accomplishments/verify/H76QCWS8WXZ4" target="_blank">Human-Centered Design</a>
-        </div>
-        <div class="project">
-          <h3>Google Developer Profile</h3>
-          <h4>Google</h4><br>
-        <br><p style="font-size: 15px;">Google developer profile showcases your coding skills, projects, and achievements on Google’s developer platform, highlighting your active involvement in tech and learning.
-</p><br><a href="https://g.dev/kayenat" target="_blank">Google Developer Profile</a>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="container">
-      <h2>Language and Research Writing</h2><br>
-      <div class="project-list">
-        <div class="project">
-          <h3>Advanced Writing</h3>
-          <h4>University of California, Irvine</h4><br>
-          <p style="font-size: 15px;">Academic Writing Specialization: Developed skills in research, clear communication, and college-level writing, culminating in a capstone research project with real-world relevance.
-
-</p><br><a href="https://www.coursera.org/account/accomplishments/verify/ER6VJXW5JNXM" target="_blank">Advanced Writing Certificate</a>
-        </div>
-        <div class="project">
-          <h3>Research for Essay Writing</h3>
-          <h4>University of California, Irvine</h4><br>
-        <p style="font-size: 15px;">Learn to plan, structure, and write university-level research papers with credible sources, proper academic tone, and correct MLA/APA citations.
-
-
-</p><br><a href="https://www.coursera.org/account/accomplishments/verify/S62GMSFZU7UU" target="_blank">Research for Essay Writing</a>
-        </div>
-        <div class="project">
-          <h3>Essay Writing</h3>
-          <h4>University of California, Irvine</h4><br>
-        <p style="font-size: 15px;">Learn to craft strong thesis statements, plan and write various essay types, develop clear supporting paragraphs, and strengthen critical thinking and editing skills.
-</p><br><a href="https://www.coursera.org/account/accomplishments/verify/YEXFFG3JQS29" target="_blank">Essay Writing Certificate</a>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="container">
-      <h2>My Projects</h2>
-      <p>Here are some of my projects on <a href="https://github.com/codekayenat" target="_blank">GitHub</a> 👇</p>
-      <div class="project-list">
-        <div class="project">
-          <h3>Blog Writing Agent</h3><br>
-          <p>A multi-agent system designed to assist users in creating technical blog posts. The agent is built using the Google Agent Development Kit (ADK) and follows a modular architecture.</p>
-          <br><a href="https://github.com/codekayenat/Blog-writing-agent" target="_blank">Blog Writing Agent</a>
-        </div>
-        <div class="project">
-          <h3>Retail Operation Agent </h3><br>
-          <p>A Retail Operation Agent oversees and manages store operations, ensuring efficient processes, inventory accuracy, and excellent customer service.</p>
-          <br><a href="https://github.com/codekayenat/Google-ADK/tree/main/3%20-%20Retails-Operations-Agent" target="_blank">Retail Operation Agent</a>
-        </div>
-        <div class="project">
-          <h3>Invoice Tracking App</h3><br>
-          <p>An Invoice Tracking Agent is responsible for monitoring, verifying, and managing invoices to ensure accurate billing and timely payments.</p>
-          <br><a href="https://github.com/codekayenat/Google-ADK/tree/main/4%20-%20Invoice-Tracking-Agent" target="_blank">Invoice Tracking App</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="container">
-      <h2>Education Club</h2>
-      
-      <div class="project-list">
-        <div class="project">
-          <h3>AI Sparck</h3><br>
-          <p>AI Sparck is an intelligent language-learning platform that uses artificial intelligence to deliver personalized lessons, real-time practice, and adaptive feedback to help users learn French efficiently and interactively.</p>
-          <br><a href="https://github.com/codekayenat/AI-Sparck" target="_blank">AI Sparck</a>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
-
-  <section id="goals">
-    <div class="container">
-      <h2>My Goals</h2>
-      <p>
-        My goal is to leverage my skills in design, technology, and problem-solving to create innovative digital experiences that have a meaningful impact. I aim to continue learning, exploring emerging technologies, and contributing to projects that combine creativity with functionality, while growing as a leader and collaborator in the tech and design community.
-      </p>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <p>
-        📧 Email: <a href="mailto:kayenatzaidi@gmail.com" target="_blank">kayenatzaidi@gmail.com</a><br>
-        💻 GitHub: <a href="https://github.com/codekayenat" target="_blank">github.com/codekayenat</a>
-      </p>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 Kayenat Zaidi | Built with ❤️ and curiosity</p>
-  </footer>
-</body>
+  </body>
 </html>
