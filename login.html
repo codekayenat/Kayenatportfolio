@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Sparck — Log in</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <div class="brand">
+          <div class="brand__logo">⚡</div>
+          <div class="brand__text">
+            <div class="brand__name">AI Sparck</div>
+            <div class="brand__tag">French Coach</div>
+          </div>
+        </div>
+
+        <div class="topbar__actions">
+          <a class="btn btn--ghost" href="signup.html">Sign up</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="app" style="grid-template-columns: 1fr;">
+      <main class="main" style="max-width: 520px; margin: 0 auto;">
+        <div class="pagehead" style="margin-bottom: 14px;">
+          <div>
+            <h1 class="h1">Log in</h1>
+            <p class="muted">Welcome back — continue your progress.</p>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="card__kicker">Log in</div>
+          <div class="card__title">Access your dashboard</div>
+
+          <div class="divider"></div>
+
+          <form data-auth="loginForm" style="display:grid; gap: 10px;">
+            <label class="small">Email</label>
+            <input
+              data-auth="email"
+              type="email"
+              placeholder="you@example.com"
+              style="width:100%;"
+              required
+            />
+
+            <label class="small">Password</label>
+            <input
+              data-auth="password"
+              type="password"
+              placeholder="Your password"
+              style="width:100%;"
+              required
+            />
+
+            <div class="divider"></div>
+
+            <button class="btn btn--primary" type="submit">Log in</button>
+            <div class="small" style="line-height:1.5;">
+              New here?
+              <a href="signup.html" style="color: var(--text); text-decoration: underline;">Create an account</a>
+            </div>
+          </form>
+        </section>
+
+        <footer class="footer">
+          <span class="muted">© AI Sparck</span>
+          <span class="muted">Login</span>
+        </footer>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
