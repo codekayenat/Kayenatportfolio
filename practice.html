@@ -22,7 +22,8 @@
         <div class="topbar__actions">
           <a class="btn btn--ghost" href="lesson.html">Lesson</a>
           <a class="btn btn--ghost" href="progress.html">Progress</a>
-          <a class="btn btn--primary" href="index.html">Dashboard</a>
+          <a class="btn btn--ghost" href="index.html">Dashboard</a>
+          <button class="btn btn--ghost" data-action="resetChat">Reset chat</button>
         </div>
       </div>
     </header>
@@ -48,10 +49,10 @@
         <div class="pagehead">
           <div>
             <h1 class="h1">Practice Chat</h1>
-            <p class="muted">Roleplay mode · Café conversation · Level A2</p>
+            <p class="muted">Roleplay mode · Café conversation · (local demo tutor)</p>
           </div>
           <div class="pagehead__actions">
-            <button class="btn btn--ghost">Reset chat</button>
+            <a class="btn btn--ghost" href="lesson.html">Back to lesson</a>
             <a class="btn btn--primary" href="progress.html">See mistakes</a>
           </div>
         </div>
@@ -65,45 +66,21 @@
             <div class="badge">Online</div>
           </div>
 
-        
-
-              <div class="chat">
-  <div class="chat__log" data-chat="log"></div>
-
-  <div class="chat__input">
-    <input data-chat="input" type="text" placeholder="Write in French..." />
-    <button class="btn btn--primary" data-chat="send">Send</button>
-  </div>
-</div>
-
-
-              <div class="bubble bubble--user">
-                Bonjour, je veux un cafe.
-              </div>
-
-              <div class="bubble bubble--assistant">
-                Correction: <strong>Bonjour, je veux un café.</strong> ✅ (Add the accent: “café”.)
-                <br /><br />
-                More polite: <strong>Je voudrais un café, s’il vous plaît.</strong>
-                <br />
-                Question: <em>Sur place ou à emporter?</em>
-              </div>
-
-              <div class="typing"><span></span><span></span><span></span></div>
-            </div>
+          <div class="chat">
+            <div class="chat__log" data-chat="log"></div>
 
             <div class="chat__input">
-              <input type="text" placeholder="Write in French..." />
-              <button class="btn btn--primary">Send</button>
+              <input data-chat="input" type="text" placeholder="Write in French..." />
+              <button class="btn btn--primary" data-chat="send">Send</button>
             </div>
           </div>
 
           <div class="divider"></div>
 
           <div class="card__actions">
-            <a class="btn btn--ghost" href="lesson.html">Back to lesson</a>
             <a class="btn btn--ghost" href="index.html">Back to dashboard</a>
-            <a class="btn btn--primary" href="progress.html">Open progress</a>
+            <a class="btn btn--ghost" href="lesson.html">Lesson</a>
+            <a class="btn btn--primary" href="progress.html">Progress</a>
           </div>
         </section>
 
@@ -115,7 +92,5 @@
     </div>
 
     <script src="app.js"></script>
-   
-
   </body>
 </html>
