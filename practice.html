@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Sparck — Practice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <div class="brand">
+          <div class="brand__logo">⚡</div>
+          <div class="brand__text">
+            <div class="brand__name">AI Sparck</div>
+            <div class="brand__tag">French Coach</div>
+          </div>
+        </div>
+
+        <div class="topbar__actions">
+          <a class="btn btn--ghost" href="lesson.html">Lesson</a>
+          <a class="btn btn--ghost" href="progress.html">Progress</a>
+          <a class="btn btn--primary" href="index.html">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="app">
+      <aside class="sidebar">
+        <nav class="nav">
+          <a class="nav__item" href="index.html"><span class="nav__icon">🏠</span><span>Dashboard</span></a>
+          <a class="nav__item" href="lesson.html"><span class="nav__icon">✨</span><span>Lesson</span></a>
+          <a class="nav__item" href="practice.html"><span class="nav__icon">💬</span><span>Practice</span></a>
+          <a class="nav__item" href="progress.html"><span class="nav__icon">📈</span><span>Progress</span></a>
+        </nav>
+
+        <div class="tip">
+          <div class="tip__label">Practice tip</div>
+          <div class="tip__text">
+            Keep it short. One sentence. Then wait for feedback. Speed comes after accuracy.
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="pagehead">
+          <div>
+            <h1 class="h1">Practice Chat</h1>
+            <p class="muted">Roleplay mode · Café conversation · Level A2</p>
+          </div>
+          <div class="pagehead__actions">
+            <button class="btn btn--ghost">Reset chat</button>
+            <a class="btn btn--primary" href="progress.html">See mistakes</a>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="card__row">
+            <div>
+              <div class="card__kicker">Live</div>
+              <div class="card__title">Talk with AI Sparck</div>
+            </div>
+            <div class="badge">Online</div>
+          </div>
+
+          <div class="chat">
+            <div class="chat__log">
+              <div class="bubble bubble--assistant">
+                Salut! 😊 You’re at a café. Start by greeting me and ordering a drink.
+              </div>
+
+              <div class="bubble bubble--user">
+                Bonjour, je veux un cafe.
+              </div>
+
+              <div class="bubble bubble--assistant">
+                Correction: <strong>Bonjour, je veux un café.</strong> ✅ (Add the accent: “café”.)
+                <br /><br />
+                More polite: <strong>Je voudrais un café, s’il vous plaît.</strong>
+                <br />
+                Question: <em>Sur place ou à emporter?</em>
+              </div>
+
+              <div class="typing"><span></span><span></span><span></span></div>
+            </div>
+
+            <div class="chat__input">
+              <input type="text" placeholder="Write in French..." />
+              <button class="btn btn--primary">Send</button>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="card__actions">
+            <a class="btn btn--ghost" href="lesson.html">Back to lesson</a>
+            <a class="btn btn--ghost" href="index.html">Back to dashboard</a>
+            <a class="btn btn--primary" href="progress.html">Open progress</a>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span class="muted">© AI Sparck</span>
+          <span class="muted">Practice page</span>
+        </footer>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
